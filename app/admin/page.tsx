@@ -21,7 +21,7 @@ export default async function AdminHomePage({}: Props) {
       <section className="p-4">
         <h2 className="font-semibold text-lg">Admin Board</h2>
       </section>
-      <section className="flex-1 p-4 grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <section className="flex-1 p-4 grid grid-cols-1 md:grid-cols-2 auto-rows-min items-start gap-3">
         <div className="p-4 rounded-lg border">
           <h3 className="text-lg text-primary font-bold">{observersCount}</h3>
           <p className="text-sm font-medium text-muted-foreground">No. Observers</p>
