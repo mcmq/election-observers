@@ -24,7 +24,7 @@ export default async function UserProfile({}: Props) {
     <div className="p-4">
       <section className="container flex flex-col items-center p-4 max-w-screen-lg rounded-lg bg-background">
         <Avatar className="size-24">
-          <AvatarImage src={publicUrl} />
+          <AvatarImage src={publicUrl || ''} />
           <AvatarFallback>
             <User2 className="size-10 text-muted-foreground" />
           </AvatarFallback>
