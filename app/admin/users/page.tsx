@@ -35,7 +35,7 @@ export default async function AdminsPage({}: Props) {
           Add Admin
         </Link>
       </section>
-      <section className="flex-1 p-4">
+      <section className="flex-1 p-4 flex flex-col">
         {(!data || !data.length) ? (
           <NoResult />
         ) : (
