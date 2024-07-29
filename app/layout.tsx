@@ -57,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(
-        "min-h-dvh bg-accent",
+        "min-h-dvh bg-accent flex flex-col",
         inter.className
       )}>
         {children}
