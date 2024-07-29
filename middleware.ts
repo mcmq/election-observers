@@ -16,12 +16,12 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  if (pathname.startsWith('/user')) {
+  if (pathname.startsWith('/')) {
     const { data } = await supabase.auth.getUser()
     if (!data.user)
       return NextResponse.rewrite(new URL(`/login?redirect=${pathname}`, request.nextUrl))
     if (pathname.startsWith('/login'))
-      return NextResponse.redirect(new URL('/user', request.nextUrl))
+      return NextResponse.redirect(new URL('/', request.nextUrl))
     return NextResponse.next()
   }
 
