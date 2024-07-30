@@ -1,7 +1,6 @@
 'use client'
 
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { CalendarIcon, CheckCircle, CheckCircle2, Loader2, Plus, User2 } from 'lucide-react'
+import { CalendarIcon, Loader2, User2 } from 'lucide-react'
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { useForm } from 'react-hook-form'
@@ -16,12 +15,13 @@ import { format } from 'date-fns'
 import { cn } from '@/lib/utils'
 import { Calendar } from '@/components/ui/calendar'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { MyToaster } from '@/lib/my-toaster'
+import { createClient } from '@/lib/supabase/client'
 
 type Props = {}
 
 export default function AddPeoplePage({}: Props) {
+  const supabase = createClient()
   const [error, setError] = useState('')
   const [preview, setPreview] = useState('')
   const [isRegistering, setRegistering] = useState(false)
@@ -41,21 +41,52 @@ export default function AddPeoplePage({}: Props) {
   })
 
   async function registerObserver(values: z.infer<typeof newUserFormSchema>) {
+    const { id, name, image, pob, dob, email, phone, role, password } = values
     try {
       setRegistering(true)
       setError('')
+      console.log(image)
       const res = await fetch('/api/register-user', {
         method: 'POSt',
-        body: JSON.stringify({ ...values })
+        body: JSON.stringify({ phone, email, password, name, role })
       })
-      const { message, error } = await res.json()
+      const { user_id, error } = await res.json()
+
       if (error) {
         setError(error)
         MyToaster.error(error)
         return
       }
 
-      MyToaster.success(message)
+      if (image) {
+        const filename = `${user_id}.${image.name.split('.').at(-1)}`
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('avatars')
+          .upload(filename, image, { contentType: image.type })
+        if (uploadError) {
+          MyToaster.error(uploadError.message)
+          return
+        }
+
+        const { error: insertError } = await supabase.from('users').insert({
+          id,
+          user_id,
+          name,
+          phone,
+          role,
+          pob,
+          dob,
+          email,
+          image: uploadData.path
+        })
+        if (insertError) {
+          MyToaster.error(insertError.message)
+          return
+        }
+      }
+
+      MyToaster.success('Registered successfully.')
+      setPreview('')
       form.reset()
     } catch (error) {
       setError((error as any).message)
@@ -77,10 +108,11 @@ export default function AddPeoplePage({}: Props) {
       return
     }
 
+
+    form.setValue('image', selectedFile)
     const reader = new FileReader()
     reader.onloadend = () => {
       if (reader.result) {
-        form.setValue('image', reader.result.toString())
         setPreview(reader.result.toString())
       }
     }

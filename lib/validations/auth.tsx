@@ -22,15 +22,7 @@ export const newUserFormSchema = z.object({
   dob: z
     .date({ required_error: 'Enter date of birth' }),
   image: z
-    .string()
-    .refine((value) => {
-      if (typeof value !== 'string') {
-        return false
-      }
-      return /^data:([\w/+.-]+);base64,([A-Za-z0-9+/=]+)$/.test(value)
-    }, {
-      message: "Invalid Data URL",
-    })
+    .instanceof(File)
     .optional(),
   email: z
     .string()
