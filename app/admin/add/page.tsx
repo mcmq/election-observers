@@ -23,7 +23,6 @@ type Props = {}
 
 export default function AddPeoplePage({}: Props) {
   const [error, setError] = useState('')
-  const [message, setMessage] = useState('')
   const [preview, setPreview] = useState('')
   const [isRegistering, setRegistering] = useState(false)
 
@@ -94,13 +93,6 @@ export default function AddPeoplePage({}: Props) {
         <h2 className="font-semibold text-lg">Add People</h2>
       </section>
       <section className="flex-1 p-4 mx-auto">
-        {message && (
-          <Alert className="my-3">
-            <CheckCircle2 className="size-5 text-green-500" />
-            <AlertTitle className="text-green-500">Congrats!</AlertTitle>
-            <AlertDescription className="text-muted-foreground">{message}</AlertDescription>
-          </Alert>
-        )}
         <Form {...form}>
           <form className="grid grid-cols-2 gap-3" onSubmit={form.handleSubmit(registerObserver)}>
             <div className="col-span-full flex flex-col items-center gap-3">
