@@ -1,5 +1,5 @@
 
-import { getFileExtensionFromBase64 } from '@/lib/helpers'
+import { dataURLtoFile, getFileExtensionFromBase64 } from '@/lib/helpers'
 import { supabaseAdmin } from '@/lib/supabase/admin'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -25,9 +25,11 @@ export async function POST(req: NextRequest) {
 
       if (image) {
         const extension = getFileExtensionFromBase64(image)
+        const filename = `${signUpData.user.id}.${extension}`
+        const file = dataURLtoFile(image, filename)
         const { data: uploadData, error: uploadError } = await supabase.storage
           .from('avatars')
-          .upload(`${signUpData.user.id}.${extension}`, image)
+          .upload(filename, file)
         if (uploadError)
           return NextResponse
             .json({ error: uploadError.message }, { status: 500 })
