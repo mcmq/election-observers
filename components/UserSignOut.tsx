@@ -35,7 +35,7 @@ export default function UserSignOut({}: Props) {
           className="justify-between"
         >
           <div className="flex gap-3 items-center">
-            <Power className="size-4" />
+            <Power className="size-4 text-destructive" />
             <span>Sign Out</span>
           </div>
           <ChevronRight className="size-4" />
