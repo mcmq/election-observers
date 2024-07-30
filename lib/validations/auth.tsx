@@ -37,3 +37,13 @@ export const newUserFormSchema = z.object({
     .string()
     .min(1, 'Enter user\'s password')
 })
+
+export const changePasswordSchema = z.object({
+  passowrd: z
+    .string()
+    .min(5, 'New password must be at least 6 characters long'),
+  confirm: z.string()
+}).refine(data => data.passowrd === data.confirm, {
+  message: 'Passwords do not match',
+  path: ['confirm']
+})

@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button'
 import { createClient } from '@/lib/supabase/client'
 import { Loader2 } from 'lucide-react'
 import { useRedirectAfterLogin } from '@/lib/use-redirect-after-login'
+import Image from 'next/image'
 
 type Props = {}
 
@@ -62,9 +63,18 @@ export default function AdminLoginForm({}: Props) {
   return (
     <Form {...form}>
       <form
-        className="w-full max-w-sm"
+        className="w-full max-w-sm space-y-6"
         onSubmit={form.handleSubmit(formSubmit)}
       >
+        <Image
+          className="size-44 aspect-auto object-cover mx-auto"
+          src="/images/banner.jpg"
+          alt="Logo"
+          width={200}
+          height={200}
+          priority
+          quality={50}
+        />
         <Card className="shadow-none">
           <CardHeader>
             <CardTitle>Login</CardTitle>

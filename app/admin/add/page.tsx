@@ -124,9 +124,9 @@ export default function AddPeoplePage({}: Props) {
       <section className="p-4 flex justify-between items-center gap-3">
         <h2 className="font-semibold text-lg">Add People</h2>
       </section>
-      <section className="flex-1 p-4 mx-auto">
+      <section className="w-full max-w-screen-md flex-1 p-4 mx-auto">
         <Form {...form}>
-          <form className="grid grid-cols-2 gap-3" onSubmit={form.handleSubmit(registerObserver)}>
+          <form className="grid grid-cols-2 gap-3 lg:border lg:p-6" onSubmit={form.handleSubmit(registerObserver)}>
             <div className="col-span-full flex flex-col items-center gap-3">
               <Avatar className="size-24">
                 <AvatarImage src={preview} />
@@ -207,7 +207,7 @@ export default function AddPeoplePage({}: Props) {
                         <Button
                           variant="outline"
                           className={cn(
-                            "w-[240px] justify-start text-left font-normal",
+                            "w-full justify-start text-left font-normal",
                             !field.value && "text-muted-foreground"
                           )}
                         >

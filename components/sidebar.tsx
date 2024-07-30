@@ -1,10 +1,10 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { LayoutDashboard, Loader2, Power, UserPlus2, Users2 } from 'lucide-react'
+import { LayoutDashboard, Loader2, Menu, Power, Settings, UserPlus2, Users2, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, buttonVariants } from './ui/button'
 import { createClient } from '@/lib/supabase/client'
 
@@ -31,13 +31,23 @@ const navItems = [
     href: '/admin/users',
     icon: Users2
   },
+  {
+    title: 'Settings',
+    href: '/settings',
+    icon: Settings
+  },
 ]
 
 export default function Sidebar({}: Props) {
   const supabase = createClient()
+  const [isOpen, setOpen] = useState(false)
   const [isSigningOut, setSigningOut] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
+
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
 
   async function signOut() {
     try {
@@ -52,9 +62,26 @@ export default function Sidebar({}: Props) {
   }
 
   return (
-    <aside className="bg-background rounded-lg">
-      <nav className="flex flex-col gap-1 p-3">
+    <aside className="bg-background flex flex-col gap-3 lg:border-r lg:dark:border-r-2">
+      <div className="flex items-center justify-between gap-3">
         <h2 className="font-bold px-2 mb-2">NAVIGATION</h2>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="lg:hidden"
+          onClick={() => setOpen(prev => !prev)}
+        >
+          {isOpen ? (
+            <X className="size-5 transition-all" />
+          ) : (
+            <Menu className="size-5 transition-all" />
+          )}
+        </Button>
+      </div>
+      <nav className={cn(
+        isOpen ? "flex" : "hidden",
+        "lg:flex flex-col gap-1 transition-all"
+      )}>
         {navItems.map(item => {
           const Icon = item.icon
           const isAdminBoard = item.href === '/admin'
@@ -90,6 +117,6 @@ export default function Sidebar({}: Props) {
           <span>Sign Out</span>
         </Button>
       </nav>
-    </aside >
+    </aside>
   )
 }

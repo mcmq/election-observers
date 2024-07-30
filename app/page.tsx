@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { buttonVariants } from '@/components/ui/button'
-import UserSignOut from '@/components/UserSignOut'
+import UserSignOut from '@/components/user-sign-out'
 import { createClient } from '@/lib/supabase/server'
 import { cn } from '@/lib/utils'
 import { ChevronRight, Settings, User2 } from 'lucide-react'
@@ -25,14 +25,13 @@ export default async function UserProfile({}: Props) {
     .getPublicUrl(userData?.image || '')
 
   return (
-    <div className="container p-4 max-w-screen-lg grid grid-cols-[200px_1fr] gap-3">
-      <aside className="flex flex-col gap-2 p-4 rounded-lg bg-background">
+    <div className="container p-4 max-w-screen-xl flex flex-col lg:grid lg:grid-cols-[250px_1fr] gap-3">
+      <aside className="flex flex-col gap-2 p-4 bg-background lg:border-r lg:dark:border-r-2">
         <Link
           href="/settings"
           className={cn(
             buttonVariants({
               variant: 'outline',
-              // size: 'lg',
               className: 'gap-3 justify-start'
             })
           )}
