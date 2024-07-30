@@ -1,6 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { buttonVariants } from '@/components/ui/button'
+import UserSignOut from '@/components/UserSignOut'
 import { createClient } from '@/lib/supabase/server'
-import { User2 } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { ChevronRight, Settings, User2 } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 type Props = {}
@@ -45,6 +49,25 @@ export default async function UserProfile({}: Props) {
           <p className="text-lg font-semibold">{userData?.dob}</p>
           <h4 className="font-medium text-sm text-muted-foreground">Date of Birth</h4>
         </div>
+      </section>
+      <section className="container my-2 flex flex-col gap-2 md:grid md:grid-cols-2 items-center p-4 max-w-screen-lg rounded-lg bg-background">
+        <Link
+          href="/settings"
+          className={cn(
+            buttonVariants({
+              variant: 'outline',
+              size: 'lg',
+              className: 'justify-between'
+            })
+          )}
+        >
+          <div className="flex gap-3 items-center">
+            <Settings className="size-4" />
+            <span>Settings</span>
+          </div>
+          <ChevronRight className="size-4" />
+        </Link>
+        <UserSignOut />
       </section>
     </div>
   )
