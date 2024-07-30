@@ -18,7 +18,7 @@ export default async function UserProfile({}: Props) {
   const { data: { publicUrl } } = supabase
     .storage
     .from('avatars')
-    .getPublicUrl(userData.image)
+    .getPublicUrl(userData?.image || '')
 
   return (
     <div className="p-4">
