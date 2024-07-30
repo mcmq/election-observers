@@ -31,14 +31,10 @@ export default function UserSignOut({}: Props) {
       <AlertDialogTrigger asChild>
         <Button
           variant="outline"
-          size="lg"
-          className="justify-between"
+          className="gap-3 justify-start"
         >
-          <div className="flex gap-3 items-center">
-            <Power className="size-4 text-destructive" />
-            <span>Sign Out</span>
-          </div>
-          <ChevronRight className="size-4" />
+          <Power className="size-4 text-destructive" />
+          <span>Sign Out</span>
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
