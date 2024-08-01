@@ -31,7 +31,8 @@ export default function AddPeoplePage({}: Props) {
     defaultValues: {
       id: '',
       name: '',
-      pob: '',
+      district: '',
+      region: '',
       image: undefined,
       email: '',
       phone: '',
@@ -41,7 +42,7 @@ export default function AddPeoplePage({}: Props) {
   })
 
   async function registerObserver(values: z.infer<typeof newUserFormSchema>) {
-    const { id, name, image, pob, dob, email, phone, role, password } = values
+    const { id, name, image, district, region, dor, email, phone, role, password } = values
     try {
       setRegistering(true)
       setError('')
@@ -74,8 +75,9 @@ export default function AddPeoplePage({}: Props) {
           name,
           phone,
           role,
-          pob,
-          dob,
+          district,
+          region,
+          dor,
           email,
           image: uploadData.path
         })
@@ -184,10 +186,10 @@ export default function AddPeoplePage({}: Props) {
             />
             <FormField
               control={form.control}
-              name="pob"
+              name="region"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Place of Birth</FormLabel>
+                  <FormLabel>Region</FormLabel>
                   <FormControl>
                     <Input placeholder="Place of Birth" {...field} />
                   </FormControl>
@@ -197,10 +199,23 @@ export default function AddPeoplePage({}: Props) {
             />
             <FormField
               control={form.control}
-              name="dob"
+              name="district"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>District</FormLabel>
+                  <FormControl>
+                    <Input placeholder="District" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="dor"
               render={({ field }) => (
                 <FormItem className="flex flex-col justify-end">
-                  <FormLabel>Date of Birth</FormLabel>
+                  <FormLabel>Date of Register</FormLabel>
                   <FormControl>
                     <Popover>
                       <PopoverTrigger asChild>
@@ -280,7 +295,7 @@ export default function AddPeoplePage({}: Props) {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="col-span-full">
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input type="password" placeholder="Password" {...field} />

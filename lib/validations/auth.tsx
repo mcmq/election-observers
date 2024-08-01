@@ -12,15 +12,18 @@ export const loginFormSchema = z.object({
 export const newUserFormSchema = z.object({
   id: z
     .string()
-    .min(3, 'Enter user\'s ID'),
+    .min(3, 'Enter ID'),
   name: z
     .string()
-    .min(3, 'Enter user\'s name'),
-  pob: z
+    .min(3, 'Enter full name'),
+  district: z
     .string()
-    .min(3, 'Enter place of birth'),
-  dob: z
-    .date({ required_error: 'Enter date of birth' }),
+    .min(3, 'Enter district'),
+  region: z
+    .string()
+    .min(3, 'Enter region'),
+  dor: z
+    .date({ required_error: 'Enter date of register' }),
   image: z
     .instanceof(File)
     .optional(),
@@ -35,7 +38,7 @@ export const newUserFormSchema = z.object({
     .min(2, 'Select role'),
   password: z
     .string()
-    .min(1, 'Enter user\'s password')
+    .min(1, 'Enter password')
 })
 
 export const changePasswordSchema = z.object({
