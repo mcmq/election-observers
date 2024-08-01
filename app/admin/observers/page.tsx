@@ -1,23 +1,30 @@
 import React from 'react'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Trash2 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import NoResult from '@/components/no-result'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import DeleteUser from '@/components/delete-user'
+import Search from './search'
 
-type Props = {}
+type Props = {
+  searchParams: {
+    id: string
+  }
+}
 
-export default async function ObserversPage({}: Props) {
+export default async function ObserversPage({ searchParams: { id } }: Props) {
   const supabase = createClient()
+  let query = supabase.from('users').select()
 
-  const { data, error } = await supabase
-    .from('users')
-    .select()
-    .eq('role', 'observer')
+  if (id) {
+    query = query.textSearch('id', `'${id}'`)
+  } else {
+    query = query.eq('role', 'observer')
+  }
 
+  const { data, error } = await query
   if (error) {
     console.log(error)
   }
@@ -26,14 +33,17 @@ export default async function ObserversPage({}: Props) {
     <>
       <section className="sticky top-0 p-4 flex justify-between items-center gap-3">
         <h2 className="font-semibold text-lg">Observers List</h2>
-        <Link
-          href="/admin/add"
-          className={cn(
-            buttonVariants()
-          )}
-        >
-          Add Observer
-        </Link>
+        <div className="flex items-center gap-3">
+          <Search />
+          <Link
+            href="/admin/add"
+            className={cn(
+              buttonVariants()
+            )}
+          >
+            Add Observer
+          </Link>
+        </div>
       </section>
       <section className="flex-1 p-4 flex flex-col">
         {(!data || !data.length) ? (
