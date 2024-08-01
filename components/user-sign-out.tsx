@@ -49,6 +49,7 @@ export default function UserSignOut({}: Props) {
           </AlertDialogCancel>
           <Button
             variant="destructive"
+            className="space-x-3"
             onClick={signOut}
             disabled={isSigningOut}
           >
