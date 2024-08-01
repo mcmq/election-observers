@@ -54,8 +54,11 @@ export default async function ObserversPage({ searchParams: { id } }: Props) {
               <TableRow>
                 <TableHead>ID</TableHead>
                 <TableHead>Name</TableHead>
-                <TableHead>Email Address</TableHead>
+                <TableHead>Title</TableHead>
+                <TableHead>Destrict</TableHead>
+                <TableHead>Region</TableHead>
                 <TableHead>Phone Number</TableHead>
+                <TableHead>Date of Register</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -64,8 +67,11 @@ export default async function ObserversPage({ searchParams: { id } }: Props) {
                 <TableRow key={observer.id}>
                   <TableCell>{observer.id}</TableCell>
                   <TableCell>{observer.name}</TableCell>
-                  <TableCell>{observer.email}</TableCell>
+                  <TableCell>{observer.title}</TableCell>
+                  <TableCell>{observer.district}</TableCell>
+                  <TableCell>{observer.region}</TableCell>
                   <TableCell>{observer.phone}</TableCell>
+                  <TableCell>{observer.dor}</TableCell>
                   <TableCell className="space-x-2 text-right">
                     <DeleteUser id={observer.user_id} />
                   </TableCell>
