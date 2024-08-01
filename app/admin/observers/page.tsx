@@ -24,7 +24,7 @@ export default async function ObserversPage({}: Props) {
 
   return (
     <>
-      <section className="p-4 flex justify-between items-center gap-3">
+      <section className="sticky top-0 p-4 flex justify-between items-center gap-3">
         <h2 className="font-semibold text-lg">Observers List</h2>
         <Link
           href="/admin/add"

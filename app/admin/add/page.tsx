@@ -123,7 +123,7 @@ export default function AddPeoplePage({}: Props) {
 
   return (
     <>
-      <section className="p-4 flex justify-between items-center gap-3">
+      <section className="sticky top-0 p-4 flex justify-between items-center gap-3">
         <h2 className="font-semibold text-lg">Add People</h2>
       </section>
       <section className="w-full max-w-screen-md flex-1 p-4 mx-auto">
