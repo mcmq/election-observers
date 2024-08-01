@@ -3,7 +3,7 @@ import { buttonVariants } from '@/components/ui/button'
 import UserSignOut from '@/components/user-sign-out'
 import { createClient } from '@/lib/supabase/server'
 import { cn } from '@/lib/utils'
-import { ChevronRight, Settings, User2 } from 'lucide-react'
+import { Settings, User2 } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -32,6 +32,7 @@ export default async function UserProfile({}: Props) {
           className={cn(
             buttonVariants({
               variant: 'outline',
+              size: 'lg',
               className: 'gap-3 justify-start'
             })
           )}
@@ -42,7 +43,7 @@ export default async function UserProfile({}: Props) {
         <UserSignOut />
       </aside>
       <section className="container grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 rounded-lg bg-background">
-        <div className="col-span-full place-self-center text-center flex flex-col gap-1">
+        <div className="col-span-full place-self-center flex flex-col items-center gap-1">
           <Avatar className="size-24">
             <AvatarImage src={publicUrl || ''} />
             <AvatarFallback>

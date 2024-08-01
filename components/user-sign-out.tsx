@@ -31,6 +31,7 @@ export default function UserSignOut({}: Props) {
       <AlertDialogTrigger asChild>
         <Button
           variant="outline"
+          size="lg"
           className="gap-3 justify-start"
         >
           <Power className="size-4 text-destructive" />
