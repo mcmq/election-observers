@@ -31,6 +31,7 @@ export default function AddPeoplePage({}: Props) {
     defaultValues: {
       id: '',
       name: '',
+      title: '',
       district: '',
       region: '',
       image: undefined,
@@ -42,11 +43,10 @@ export default function AddPeoplePage({}: Props) {
   })
 
   async function registerObserver(values: z.infer<typeof newUserFormSchema>) {
-    const { id, name, image, district, region, dor, email, phone, role, password } = values
+    const { id, name, title, image, district, region, dor, email, phone, role, password } = values
     try {
       setRegistering(true)
       setError('')
-      console.log(image)
       const res = await fetch('/api/register-user', {
         method: 'POSt',
         body: JSON.stringify({ phone, email, password, name, role })
@@ -73,6 +73,7 @@ export default function AddPeoplePage({}: Props) {
           id,
           user_id,
           name,
+          title,
           phone,
           role,
           district,
@@ -179,6 +180,19 @@ export default function AddPeoplePage({}: Props) {
                   <FormLabel>Full Name</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter full name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter title" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -295,7 +309,7 @@ export default function AddPeoplePage({}: Props) {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem className="col-span-full">
+                <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input type="password" placeholder="Password" {...field} />

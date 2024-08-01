@@ -16,12 +16,15 @@ export const newUserFormSchema = z.object({
   name: z
     .string()
     .min(3, 'Enter full name'),
+  title: z
+    .string()
+    .min(3, 'Enter title'),
   district: z
     .string()
-    .min(3, 'Enter district'),
+    .min(2, 'Enter district'),
   region: z
     .string()
-    .min(3, 'Enter region'),
+    .min(2, 'Enter region'),
   dor: z
     .date({ required_error: 'Enter date of register' }),
   image: z
