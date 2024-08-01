@@ -25,7 +25,7 @@ export default async function UserProfile({}: Props) {
     .getPublicUrl(userData?.image || '')
 
   return (
-    <div className="container p-4 max-w-screen-xl flex flex-col lg:grid lg:grid-cols-[250px_1fr] gap-3">
+    <div className="container p-4 max-w-screen-xl flex flex-col-reverse lg:grid lg:grid-cols-[250px_1fr] gap-3">
       <aside className="flex flex-col gap-2 p-4 bg-background lg:border-r lg:dark:border-r-2">
         <Link
           href="/settings"
