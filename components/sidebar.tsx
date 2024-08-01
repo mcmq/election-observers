@@ -62,7 +62,7 @@ export default function Sidebar({}: Props) {
   }
 
   return (
-    <aside className="bg-background flex flex-col gap-3 lg:border-r lg:dark:border-r-2">
+    <aside className="sticky top-0 bg-background flex flex-col gap-3 lg:border-r lg:dark:border-r-2">
       <div className="flex items-center justify-between gap-3">
         <h2 className="font-bold px-2 mb-2">NAVIGATION</h2>
         <Button
