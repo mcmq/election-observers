@@ -42,27 +42,35 @@ export default async function UserProfile({}: Props) {
         <UserSignOut />
       </aside>
       <section className="container grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 rounded-lg bg-background">
-        <div className="col-span-full place-self-center flex flex-col gap-1">
+        <div className="col-span-full place-self-center text-center flex flex-col gap-1">
           <Avatar className="size-24">
             <AvatarImage src={publicUrl || ''} />
             <AvatarFallback>
               <User2 className="size-10 text-muted-foreground" />
             </AvatarFallback>
           </Avatar>
-          <h3 className="text-xl font-semibold">{user?.user_metadata.display_name}</h3>
-          <p className="text-sm text-muted-foreground font-medium">{user?.email}</p>
+          <h3 className="text-xl font-semibold">{userData?.name}</h3>
+          <p className="text-sm text-muted-foreground font-medium">{userData?.title}</p>
+        </div>
+        <div className="flex flex-col gap-1 border p-4 rounded-lg">
+          <p className="text-lg md:text-base font-semibold">{userData?.email}</p>
+          <h4 className="font-medium text-sm text-muted-foreground">Email Address</h4>
         </div>
         <div className="flex flex-col gap-1 border p-4 rounded-lg">
           <p className="text-lg md:text-base font-semibold">{userData?.phone}</p>
           <h4 className="font-medium text-sm text-muted-foreground">Phone Number</h4>
         </div>
         <div className="flex flex-col gap-1 border p-4 rounded-lg">
-          <p className="text-lg md:text-base font-semibold">{userData?.pob}</p>
-          <h4 className="font-medium text-sm text-muted-foreground">Place of Birth</h4>
+          <p className="text-lg md:text-base font-semibold">{userData?.district}</p>
+          <h4 className="font-medium text-sm text-muted-foreground">District</h4>
         </div>
         <div className="flex flex-col gap-1 border p-4 rounded-lg">
-          <p className="text-lg md:text-base font-semibold">{userData?.dob}</p>
-          <h4 className="font-medium text-sm text-muted-foreground">Date of Birth</h4>
+          <p className="text-lg md:text-base font-semibold">{userData?.region}</p>
+          <h4 className="font-medium text-sm text-muted-foreground">Region</h4>
+        </div>
+        <div className="flex flex-col gap-1 border p-4 rounded-lg">
+          <p className="text-lg md:text-base font-semibold">{userData?.dor}</p>
+          <h4 className="font-medium text-sm text-muted-foreground">Date of Register</h4>
         </div>
       </section>
     </div>
