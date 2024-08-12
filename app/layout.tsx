@@ -4,6 +4,7 @@ import './globals.css'
 import { cn } from '@/lib/utils'
 import { Toaster } from '@/components/ui/sonner'
 import { ThemeProvider } from 'next-themes'
+import Locked from '@/components/locked'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -55,6 +56,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
+  return <Locked />
+
   return (
     <html lang="en">
       <body className={cn(
