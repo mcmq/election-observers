@@ -56,9 +56,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-
-  return <Locked />
-
   return (
     <html lang="en">
       <body className={cn(
@@ -71,7 +68,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <Locked />
           <Toaster />
         </ThemeProvider>
       </body>
